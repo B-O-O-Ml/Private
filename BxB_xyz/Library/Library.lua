@@ -1224,6 +1224,7 @@ do
 
         Label.TextLabel = TextLabel;
         Label.Container = Container;
+      
 
         function Label:SetText(Text)
             TextLabel.Text = Text
@@ -2984,6 +2985,9 @@ function Library:CreateWindow(...)
 
         function Tab:AddLeftGroupbox(Name)
             return Tab:AddGroupbox({ Side = 1; Name = Name; });
+        end;
+        function Tab:AddBigGroupbox(Name)
+            return Tab:AddGroupbox({ Side = 2; Name = Name; });
         end;
 
         function Tab:AddRightGroupbox(Name)
