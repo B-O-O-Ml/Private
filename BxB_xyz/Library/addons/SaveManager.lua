@@ -1,7 +1,7 @@
 local httpService = game:GetService('HttpService')
 
 local SaveManager = {} do
-	SaveManager.Folder = 'LinoriaLibSettings'
+	SaveManager.Folder = 'Library_Setting(B)'
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
@@ -108,7 +108,7 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Load(name)
-		local file = self.Folder .. '/settings/' .. name .. '.json'
+		local file = self.Folder .. '/Settings/' .. name .. '.json'
 		if not isfile(file) then return false, 'invalid file' end
 
 		local success, decoded = pcall(httpService.JSONDecode, httpService, readfile(file))
@@ -133,8 +133,8 @@ local SaveManager = {} do
 	function SaveManager:BuildFolderTree()
 		local paths = {
 			self.Folder,
-			self.Folder .. '/themes',
-			self.Folder .. '/settings'
+			self.Folder .. '/Themes',
+			self.Folder .. '/Settings'
 		}
 
 		for i = 1, #paths do
@@ -146,7 +146,7 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:RefreshConfigList()
-		local list = listfiles(self.Folder .. '/settings')
+		local list = listfiles(self.Folder .. '/Settings')
 
 		local out = {}
 		for i = 1, #list do
@@ -177,8 +177,8 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:LoadAutoloadConfig()
-		if isfile(self.Folder .. '/settings/autoload.txt') then
-			local name = readfile(self.Folder .. '/settings/autoload.txt')
+		if isfile(self.Folder .. '/Settings/Autoload.txt') then
+			local name = readfile(self.Folder .. '/Settings/Autoload.txt')
 
 			local success, err = self:Load(name)
 			if not success then
@@ -241,7 +241,7 @@ local SaveManager = {} do
 		
 		section:AddButton('Autoload config', function()
 			local name = Options.SaveManager_ConfigList.Value
-			writefile(self.Folder .. '/settings/autoload.txt', name)
+			writefile(self.Folder .. '/Settings/Autoload.txt', name)
 			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
 			self.Library:Notify(string.format('Set %q to auto load', name))
 		end)
@@ -254,8 +254,8 @@ local SaveManager = {} do
 
 		SaveManager.AutoloadLabel = section:AddLabel('Current autoload config: none', true)
 
-		if isfile(self.Folder .. '/settings/autoload.txt') then
-			local name = readfile(self.Folder .. '/settings/autoload.txt')
+		if isfile(self.Folder .. '/Settings/Autoload.txt') then
+			local name = readfile(self.Folder .. '/Settings/Autoload.txt')
 			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
 		end
 
