@@ -79,7 +79,7 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Save(name)
-		local fullPath = self.Folder .. '/settings/' .. name .. '.json'
+		local fullPath = self.Folder .. '/Settings/' .. name .. '.json'
 
 		local data = {
 			objects = {}
